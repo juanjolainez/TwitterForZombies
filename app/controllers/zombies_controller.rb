@@ -47,20 +47,13 @@ class ZombiesController < ApplicationController
     end
   end
 
-  #PATCH/PUT /zombies/updateName/1
-  # PATCH/PUT /zombies/1.json
+  #PATCH/GET /zombies/1/updateName/
+  # PATCH/GET /zombies/1/updateName.json
   def updateName 
-    respond_to do |format|
-      if @zombie.update(zombie_params)
-        format.html { redirect_to @zombie, notice: 'Zombie was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { 
-          render action: 'edit' 
-        }
-        format.json { render json: @zombie.errors, status: :unprocessable_entity }
-      end
-    end
+    
+    @zombie = Zombie.find(params[:id]);
+    logger.info @zombie
+
   end
 
   # PATCH/PUT /zombies/1
@@ -75,6 +68,14 @@ class ZombiesController < ApplicationController
         format.json { render json: @zombie.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def editWithData
+    @zombie = Zombie.find(params[:id])
+    @zombie.update_attributes(:name => params[:name])
+    @zombie.update_attributes(:age => params[:age])
+    redirect_to :action => 'index'
+
   end
 
   # DELETE /zombies/1

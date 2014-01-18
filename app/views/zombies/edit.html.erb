@@ -1,12 +1,19 @@
 <h1>Editing zombie</h1>
 
-<%= form_tag do %>
-  <%= label_tag(:name, "Name:") %>
-  <%= text_field_tag(:name) %>
-  <%= submit_tag("Submit") %>
-<% end %>
+<form accept-charset="UTF-8" action="/zombies/1/editWithData" method="post">
+<div style="margin: 0px; padding: 0px; display: inline;">
+	<input name="utf8" type="hidden" value="✓"/>
+	<input name="authenticity_token" type="hidden" value="vzRnklo3EpZjWVnnREVSzNZbwmPcBk4nEitibHywPEE="/>
+</div>
 
+<%= label_tag(:name, "Name:") %>
+<%= text_field_tag(:name) %>
+<br/>
+<%= label_tag(:age, "Age:") %>
+<%= text_field_tag(:age) %>
+<%= submit_tag("Submit") %>
 
+</form>
 
 <%= link_to 'Show', @zombie %> |
 <%= link_to 'Back', zombies_path %>
