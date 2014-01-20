@@ -9,6 +9,8 @@
       <th>Bio</th>
       <th>Age</th>
       <th>Rotting</th>
+      <th>Brain status</th>
+      <th>Brain flavour</th>
       <th></th>
       <th></th>
       <th></th>
@@ -22,6 +24,12 @@
         <td><%= zombie.bio %></td>
         <td><%= zombie.age %></td>
         <td><%= zombie.rotting %></td>
+        <td><%= if(zombie.brain != nil) 
+                  zombie.brain.status 
+                end %></td>
+        <td><%= if(zombie.brain != nil) 
+                  zombie.brain.flavor 
+                end %></td>
         <td><%= link_to 'Show', zombie %></td>
         <td><%= link_to 'Edit', edit_zombie_path(zombie) %></td>
         <td><%= link_to 'Destroy', zombie, method: :delete, data: { confirm: 'Are you sure?' } %></td>

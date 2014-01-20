@@ -1,15 +1,14 @@
-class ZombiesController < ApplicationController
+class BrainsController < ApplicationController
 
 
-  before_action :set_zombie, only: [:show, :edit, :update, :destroy]
 
   # GET /zombies
   # GET /zombies.json
   def index
-    @zombies = Zombie.all.includes(:brain).all
+    @brains = Brain.all
     respond_to do |format|
       format.html
-      format.json{render :json => @zombies}
+      format.json{render :json => @brains}
     end
   end
 
@@ -20,7 +19,7 @@ class ZombiesController < ApplicationController
 
   # GET /zombies/new
   def new
-    @zombie = Zombie.new
+    @brain = Brain.new
   end
 
   # GET /zombies/1/edit
@@ -32,15 +31,15 @@ class ZombiesController < ApplicationController
   # POST /zombies
   # POST /zombies.json
   def create
-    @zombie = Zombie.new(zombie_params)
+    @brain = Brain.new(brain_params)
 
     respond_to do |format|
-      if @zombie.save
-        format.html { redirect_to @zombie, notice: 'Zombie was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @zombie }
+      if @brain.save
+        format.html { redirect_to @brain, notice: 'Brain was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @brain }
       else
         format.html { render action: 'new' }
-        format.json { render json: @zombie.errors, status: :unprocessable_entity }
+        format.json { render json: @brain.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -49,8 +48,8 @@ class ZombiesController < ApplicationController
   # PATCH/GET /zombies/1/updateName.json
   def updateName 
     
-    @zombie = Zombie.find(params[:id]);
-    logger.info @zombie
+    @brain = Zombie.find(params[:id]);
+    logger.info @brain
 
   end
 
@@ -58,20 +57,20 @@ class ZombiesController < ApplicationController
   # PATCH/PUT /zombies/1.json
   def update
     respond_to do |format|
-      if @zombie.update(zombie_params)
-        format.html { redirect_to @zombie, notice: 'Zombie was successfully updated.' }
+      if @brain.update(brain_params)
+        format.html { redirect_to @brain, notice: 'Zombie was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @zombie.errors, status: :unprocessable_entity }
+        format.json { render json: @brain.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def editWithData
-    @zombie = Zombie.find(params[:id])
-    @zombie.update_attributes(:name => params[:name])
-    @zombie.update_attributes(:age => params[:age])
+    @brain = Zombie.find(params[:id])
+    @brain.update_attributes(:name => params[:name])
+    @brain.update_attributes(:age => params[:age])
     redirect_to :action => 'index'
 
   end
@@ -79,9 +78,9 @@ class ZombiesController < ApplicationController
   # DELETE /zombies/1
   # DELETE /zombies/1.json
   def destroy
-    @zombie.destroy
+    @brain.destroy
     respond_to do |format|
-      format.html { redirect_to zombies_url }
+      format.html { redirect_to brain_url }
       format.json { head :no_content }
     end
   end
@@ -89,11 +88,11 @@ class ZombiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_zombie
-      @zombie = Zombie.find(params[:id])
+      @brain = Brain.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def zombie_params
-      params.require(:zombie).permit(:name, :bio, :age)
+    def brain_params
+      params.require(:brain).permit(:zombie_id, :status, :flavor)
     end
 end

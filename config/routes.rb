@@ -1,10 +1,14 @@
 TwitterForZombies::Application.routes.draw do
   resources :zombies do
+
+    resources :tweets
     member do
       get 'updateName'
       post 'editWithData'
     end
   end
+
+  resources :brains 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

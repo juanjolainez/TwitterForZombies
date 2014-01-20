@@ -1,0 +1,30 @@
+<h1>Listing Tweets</h1>
+
+ 
+
+<table>
+  <thead>
+    <tr>
+      <th>Zombie Name</th>
+      <th>Text</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tweets.each do |tweet| %>
+      <tr>
+        <td><%= @zombie.name %></td>
+        <td><%= tweet.text %></td>
+        <td><%= link_to 'Show', [@zombie, tweet] %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tweet', new_zombie_tweet_path %>
